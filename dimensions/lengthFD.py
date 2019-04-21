@@ -20,6 +20,6 @@ def length(result, interval):
             sums3.append(sum([sum(result[i]) for i in range(idx1,(idx1+inter+1))])/(inter+1))
             idx1 += inter+1
 
-    DL = plot.loglog(sums3,interval,plot=False))
+    DL = plot.loglog(sums3,interval,plot=False)
 
     return DL
