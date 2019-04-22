@@ -1,12 +1,13 @@
 
 import statistics as stat
 import numpy as np
+from Complexity.tools import plot
 
 def variance(result, interval):
 
     from Complexity.preprocessing import intervals
 
-    result = intervals.subinterval(result, interval, type='Length')
+    result = intervals.subinterval(result, interval, type='length')
 
     result2 = []; sums = []
 
@@ -22,6 +23,6 @@ def variance(result, interval):
             sums.append(sum([result2[i] for i in range(idx1,(idx1+inter+1))])/(inter+1))
             idx1 += inter+1
 
-    DL = plot.loglog(sums3,interval,plot=False)
+    DL = plot.loglog(sums,interval,plot=False)
 
     return DL
