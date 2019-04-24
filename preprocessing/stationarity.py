@@ -126,21 +126,26 @@ def determine_interval(intervals,df,labels):
 
     return appLists
 
-def determine_intervalV2(frameSize, y, overlap=None, percent=None):
+def determine_intervalV2(frameSize, y, overlap=False, percent=0.5, unit=False):
 
     init = 0
     frames = []
 
-    if not overlap:
-        for element in range(frameSize,len(y),frameSize):
-            frames.append(y[init:element])
-            init = element
-
-    else:
+    if overlap:
         lap = frameSize-round(frameSize*percent)
 
         for element in range(frameSize,len(y),lap):
             frames.append(y[init:element])
             init += lap
+
+    elif unit:
+        for element in range(frameSize,len(y),1):
+            frames.append(y[init:element])
+            init += 1
+
+    else:
+        for element in range(frameSize,len(y),frameSize):
+            frames.append(y[init:element])
+            init = element
 
     return frames
