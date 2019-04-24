@@ -23,6 +23,8 @@ def variance(result, interval):
             sums.append(sum([result2[i] for i in range(idx1,(idx1+inter+1))])/(inter+1))
             idx1 += inter+1
 
-    DL = plot.loglog(sums,interval,plot=False)
+    slope = plot.loglog(sums,interval,plot=False)
+
+    DL = 2.0 - (slope/2.0)
 
     return DL

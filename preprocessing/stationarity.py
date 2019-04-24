@@ -119,10 +119,28 @@ def determine_interval(intervals,df,labels):
         print(len(dfb))
         dfb = df[df[labels[0]] % stopCond < sensitivity].index
         sensitivity *= 10
-        if
 
     for item in dfb[1:]:
         appLists.append(df[labels[1]][init:item])
         init = item
 
     return appLists
+
+def determine_intervalV2(frameSize, y, overlap=None, percent=None):
+
+    init = 0
+    frames = []
+
+    if not overlap:
+        for element in range(frameSize,len(y),frameSize):
+            frames.append(y[init:element])
+            init = element
+
+    else:
+        lap = frameSize-round(frameSize*percent)
+
+        for element in range(frameSize,len(y),lap):
+            frames.append(y[init:element])
+            init += lap
+
+    return frames
