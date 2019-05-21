@@ -1,6 +1,6 @@
 
 import numpy as np
-from math import cos
+from math import cos,sqrt
 
 def brownian(T):
 
@@ -22,11 +22,11 @@ def brownian(T):
 
     return X
 
-def weierstrass(step):
+def weierstrass(step=0.001):
 ## Need to fix
-    a = 0.5
-    b = 15
-    n = 800
+    a = 0.73
+    b = 5
+    n = 10
     intervalBegin = 0
     intervalEnd = 1
     data = []
@@ -36,5 +36,12 @@ def weierstrass(step):
         for i in range(n):
             output += pow(a, i) * cos(pow(b, i) * i * x * step)
             data.append(output)
+
+    return data
+
+def white(mu=0, variance=1, numPoints=2**13):
+
+    sigma = math.sqrt(variance)
+    data = np.random.normal(mu, sigma, size=numPoints)
 
     return data

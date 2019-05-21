@@ -22,6 +22,4 @@ def length(result, interval):
 
     slope = plot.loglog(sums3,interval,plot=False)
 
-    DL = slope
-
-    return DL
+    return 2 - slope

@@ -25,7 +25,7 @@ def variance(result, interval):
 
     slope = plot.loglog(sums,interval,plot=False)
 
-    DL = 2.0 - (slope/2.0)
-    DL =  (DL/4) + 1
+    FD = 2. - (slope/2.)
+    #DL =  (DL/4) + 1
 
-    return DL
+    return FD
