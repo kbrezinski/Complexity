@@ -9,18 +9,16 @@ def loglog(sums2,interval=None,type=None,plot=False,smoothing=None):
 
         y = [np.log(item) for item in sums2]
         x = [1/(vel+1) for vel in interval]
-        slope,yInt,_,_,_ = stats.linregress(x,y)
+        slope, yInt, _,_,_ = stats.linregress(x,y)
 
     elif type is 'Density':
+        from sklearn.linear_model import HuberRegressor
 
-        y = sums2
-        x = [_ for _ in range(0,len(sums2))]
+        A = sums2
+        x = np.log2(np.arange(1,len(A)))
 
-        if smoothing:
-            ## Addition of smoothing for spanish moss
-            pass
-
-        slope,yInt,_,_,_ = stats.linregress(x, y)
+        huber = HuberRegressor().fit(x[:,None], -np.ravel(A[1:,None]))
+        slope = huber.coef_
 
     if plot == True:
         plt.scatter(x,y,s=5,color='red')

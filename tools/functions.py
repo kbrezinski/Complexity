@@ -22,20 +22,19 @@ def brownian(T):
 
     return X
 
-def weierstrass(step=0.001):
-## Need to fix
+def weierstrass(step=0.0001):
+
     a = 0.73
     b = 5
-    n = 10
+    n = 100
     intervalBegin = 0
     intervalEnd = 1
     data = []
-
     for x in range(int((1 / step) * abs(intervalEnd - intervalBegin))):
         output = 0
         for i in range(n):
             output += pow(a, i) * cos(pow(b, i) * i * x * step)
-            data.append(output)
+        data.append(output)
 
     return data
 

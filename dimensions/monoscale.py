@@ -1,11 +1,15 @@
 
 import numpy as np
+import scipy as sp
 
-def zero_cross(y):
+def zero_cross(y, smooth=False, smooth_params=[111,10]):
 
     mn = np.mean(y) #Set the mean of the signal
     count = 0    #Set the number of crosses to 0
     last = y[0] - mn  #Set the last index to first index
+
+    if smooth:
+        y = sp.signal.savgol_filter(y , smooth_params[0], 1)
 
     for elem in range(len(y)):
         diff = y[elem] - mn
