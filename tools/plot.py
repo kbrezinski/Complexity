@@ -14,17 +14,17 @@ def loglog(sums2,interval=None,type=None,plot=False,smoothing=None):
     elif type is 'Density':
         from sklearn.linear_model import HuberRegressor
 
-        A = sums2
-        x = np.log2(np.arange(1,len(A)))
+        y = -np.ravel(sums2[1:,None])
+        x = np.log2(np.arange(1,len(y)+1))
 
-        huber = HuberRegressor().fit(x[:,None], -np.ravel(A[1:,None]))
-        slope = huber.coef_
+        huber = HuberRegressor().fit(x[:,None], y)
+        slope, yInt = huber.coef_, huber.intercept_
 
     if plot == True:
         plt.scatter(x,y,s=5,color='red')
         plt.plot([min(x),max(x)],\
                  [min(x)*slope+yInt,max(x)*slope+yInt],color='black')
 
-        print('The slope is:{0}'.format(slope))
+        print('The slope is: {0}'.format(slope))
 
-    return slope
+    return slope, yInt
