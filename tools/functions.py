@@ -2,9 +2,9 @@
 import numpy as np
 from math import cos,sqrt
 
-def brownian(T):
+def brownian(T, numPoints=2**13):
 
-    N = 8000
+    N = numPoints
 
     dt = T/(N-1) # Time step
 
