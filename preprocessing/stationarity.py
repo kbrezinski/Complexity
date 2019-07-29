@@ -130,18 +130,17 @@ def determine_intervalV2(frameSize, y, overlap=False, percent=0.5, unit=False):
 
     init = 0
     frames = []
+    lap = frameSize-round(frameSize*percent)
 
-    if overlap:
-        lap = frameSize-round(frameSize*percent)
-
-        for element in range(frameSize,len(y),lap):
-            frames.append(y[init:element])
-            init += lap
-
-    elif unit:
+    if unit:
         for element in range(frameSize,len(y),1):
             frames.append(y[init:element])
             init += 1
+
+    elif overlap:
+        for element in range(frameSize,len(y),lap):
+            frames.append(y[init:element])
+            init += lap
 
     else:
         for element in range(frameSize,len(y),frameSize):
