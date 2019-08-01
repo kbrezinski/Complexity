@@ -133,16 +133,19 @@ def determine_intervalV2(frameSize, y, overlap=False, percent=0.5, unit=False):
     lap = frameSize-round(frameSize*percent)
 
     if unit:
+        print('Frame size set to unit interval')
         for element in range(frameSize,len(y),1):
             frames.append(y[init:element])
             init += 1
 
     elif overlap:
+        print('Frame size set to overlap with percent:{}'.format(percent))
         for element in range(frameSize,len(y),lap):
             frames.append(y[init:element])
             init += lap
 
     else:
+        print('Frame size set to no overlap')
         for element in range(frameSize,len(y),frameSize):
             frames.append(y[init:element])
             init = element
